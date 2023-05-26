@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 export const Statistics = props => {
   const { good, neutral, bad, total, positive } = props;
