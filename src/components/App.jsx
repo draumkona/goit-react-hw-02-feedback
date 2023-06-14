@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Statistics } from './Statistics/Statistics';
 import { Notification } from './Notification/Notification';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import css from '../components/App.css';
 
 export class App extends Component {
   state = {
@@ -10,9 +11,10 @@ export class App extends Component {
     bad: 0,
   };
 
-  handleFeedback = e => {
-    const { name } = e.target;
-    this.setState(state => ({ [name]: state[name] + 1 }));
+  handleFeedback = state => {
+    this.setState(prevState => {
+      return { [state]: prevState[state] + 1 };
+    });
   };
 
   countTotalFeedback = () => {
@@ -32,25 +34,29 @@ export class App extends Component {
     const actualState = this.state;
 
     return (
-      <section title="Please leave feedback" class="feedbackSection">
-        <h1>Please leave feedback</h1>
-        <FeedbackOptions
-          options={actualState}
-          onLeaveFeedback={this.handleFeedback}
-        />
-        <h2>Statistics:</h2>
-        {total ? (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={total}
-            positive={positive}
+      <>
+        <section title="Please leave feedback" className={css.feedbackSection}>
+          <h2>Please leave feedback</h2>
+          <FeedbackOptions
+            options={actualState}
+            onLeaveFeedback={this.handleFeedback}
           />
-        ) : (
-          <Notification message="There is no feedback to display :(" />
-        )}
-      </section>
+        </section>
+        <section>
+          <h2>Statistics:</h2>
+          {total ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positive={positive}
+            />
+          ) : (
+            <Notification message="There is no feedback to display :(" />
+          )}
+        </section>
+      </>
     );
   }
 }

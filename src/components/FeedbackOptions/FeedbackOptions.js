@@ -11,7 +11,11 @@ export const FeedbackOptions = props => {
       {optionKeys.map((option, index) => {
         return (
           <li key={index}>
-            <button type="button" name={option} onClick={onLeaveFeedback}>
+            <button
+              type="button"
+              name={option}
+              onClick={() => onLeaveFeedback(option)}
+            >
               {option}
             </button>
           </li>
