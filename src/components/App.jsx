@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Statistics } from './Statistics/Statistics';
 import { Notification } from './Notification/Notification';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import css from '../components/App.css';
+import { Section } from './Section/Section';
 
 export class App extends Component {
   state = {
@@ -35,15 +35,13 @@ export class App extends Component {
 
     return (
       <>
-        <section title="Please leave feedback" className={css.feedbackSection}>
-          <h2>Please leave feedback</h2>
+        <Section title="Please leave feedback">
           <FeedbackOptions
             options={actualState}
             onLeaveFeedback={this.handleFeedback}
           />
-        </section>
-        <section>
-          <h2>Statistics:</h2>
+        </Section>
+        <Section title="Statistics">
           {total ? (
             <Statistics
               good={good}
@@ -55,7 +53,7 @@ export class App extends Component {
           ) : (
             <Notification message="There is no feedback to display :(" />
           )}
-        </section>
+        </Section>
       </>
     );
   }
